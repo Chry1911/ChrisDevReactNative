@@ -18,6 +18,10 @@ const LoginApplication = ({navigation}: {navigation: any}) => {
   };
   const forgetButton = () => alert("Password forgot");
 
+  const registrationButton = () => {
+    navigation.navigate('Register'); 
+  }
+
   return (
     
       <View style={styles.container}>
@@ -45,6 +49,9 @@ const LoginApplication = ({navigation}: {navigation: any}) => {
         <TouchableOpacity onPress={forgetButton}>
           <Text style={styles.forgot_button}>Forgot Password?</Text> 
         </TouchableOpacity> 
+        <TouchableOpacity onPress={registrationButton}>
+          <Text style={styles.forgot_button}>Not registred Yet?</Text> 
+        </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn} onPress={loginFunction}>
           <Text style={styles.loginText}>LOGIN</Text> 
         </TouchableOpacity> 
