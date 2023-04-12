@@ -1,13 +1,22 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-
+import * as React from 'react';
+import { View, StyleSheet} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { CommonActions } from '@react-navigation/native';
 
-const Tab = createBottomTabNavigator();
+import MyFAB from '../components/fab';
+
+type ParamList = {
+    Home: { title: string };
+    Settings: { title: string };
+};
+
+
+
+const Tab = createBottomTabNavigator<ParamList>();
+
 
 export default function MyComponent() {
   return (
@@ -43,17 +52,6 @@ export default function MyComponent() {
 
             return null;
           }}
-          getLabelText={({ route }) => {
-            const { options } = descriptors[route.key];
-            const label =
-              options.tabBarLabel !== undefined
-                ? options.tabBarLabel
-                : options.title !== undefined
-                ? options.title
-                : route.title;
-
-            return label;
-          }}
         />
       )}
     >
@@ -62,6 +60,7 @@ export default function MyComponent() {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
+          title:"Home",
           tabBarIcon: ({ color, size }) => {
             return <Ionicons name="md-home-outline" size={size} color={color} />;
           },
@@ -72,6 +71,7 @@ export default function MyComponent() {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
+          title: "Settings",
           tabBarIcon: ({ color, size }) => {
             return <MaterialCommunityIcons name="cogs" size={size} color={color} />;
           },
@@ -84,7 +84,8 @@ export default function MyComponent() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text variant="headlineMedium">Home!</Text>
+        <Text variant="headlineMedium" style={styles.text}>Home!</Text>
+        <MyFAB />
     </View>
   );
 }
@@ -92,15 +93,26 @@ function HomeScreen() {
 function SettingsScreen() {
   return (
     <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
+        <Text variant="headlineMedium" style={styles.text}>Settings!</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    text: {
+        textAlign: 'center',
+        flex: 1,
+        justifyContent: 'center',
+    },
+    dialog: {
+        backgroundColor: 'white',
+        padding: 20,
+    },
 });
+
+
+
