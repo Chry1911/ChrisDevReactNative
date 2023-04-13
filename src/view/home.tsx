@@ -7,9 +7,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CommonActions } from '@react-navigation/native';
 
 import MyFAB from '../components/fab';
+import MySettingPage from './settings';
 
 type ParamList = {
-    Home: { title: string };
+    HomePage: { title: string };
     Settings: { title: string };
 };
 
@@ -56,7 +57,7 @@ export default function MyComponent() {
       )}
     >
       <Tab.Screen
-        name="Home"
+        name="HomePage"
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
@@ -93,7 +94,7 @@ function HomeScreen() {
 function SettingsScreen() {
   return (
     <View style={styles.container}>
-        <Text variant="headlineMedium" style={styles.text}>Settings!</Text>
+       <MySettingPage />
     </View>
   );
 }

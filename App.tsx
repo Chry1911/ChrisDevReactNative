@@ -19,11 +19,11 @@ function App() {
           name="Login"
           component={First}/>
         <Stack.Screen 
-        name="Home" 
-        component={Second} />
+          name="Home" 
+          component={Second} />
         <Stack.Screen 
-        name="Register" 
-        component={Third} />  
+          name="Register" 
+          component={Third} />  
       </Stack.Navigator>
     </NavigationContainer>
   );
