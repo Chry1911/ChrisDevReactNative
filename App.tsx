@@ -23,7 +23,7 @@ function App() {
         component={Second} />
         <Stack.Screen 
         name="Register" 
-        component={Third} />
+        component={Third} />  
       </Stack.Navigator>
     </NavigationContainer>
   );

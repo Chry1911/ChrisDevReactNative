@@ -1,21 +1,53 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image, Alert} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { StatusBar } from "expo-status-bar";
 
-
+import { login, LoginData } from '../api/auth';
 
 
 const LoginApplication = ({navigation}: {navigation: any}) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const loginFunction = () => {
-    //console.log(email);
-    //console.log(password);
-    navigation.navigate('Home'); 
+
+  const handlePasswordChange = (value : string) => {
+    setPassword(value);
   };
+
+  const handleEmailChange = (value : string) => {
+    setEmail(value);
+  }
+  
+  const loginFunction = async () => {
+    console.log("enter into the function to login a user")
+
+    const loginData: LoginData = {
+      email,
+      password,
+    };
+    console.log(JSON.stringify(loginData));
+    login(loginData)
+    .then((response) => {
+      console.log(response.data);
+      console.log(response.status);
+      console.log(response.data.message);
+      if(response.data.message === 'success'){
+          navigation.navigate("Home");
+      }else {
+        Alert.alert(response.data.message);
+      }
+    })
+    .catch((error) => {
+        alert("Something went wrong on the registration");
+        console.log(error);
+        console.log(error.response.data); // the error response data returned by the server
+        console.log(error.response.status); 
+        
+    });
+  }
+
+  
   const forgetButton = () => alert("Password forgot");
 
   const registrationButton = () => {
@@ -32,7 +64,7 @@ const LoginApplication = ({navigation}: {navigation: any}) => {
             style={styles.TextInput}
             placeholder="Email"
             placeholderTextColor="#003f5c"
-            onChangeText={(email) => setEmail(email)}
+            onChangeText={handleEmailChange}
             mode="outlined"
           /> 
         </View> 
@@ -42,7 +74,7 @@ const LoginApplication = ({navigation}: {navigation: any}) => {
             placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={handlePasswordChange}
             mode="outlined"
           /> 
         </View> 

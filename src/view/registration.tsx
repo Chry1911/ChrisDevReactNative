@@ -1,35 +1,68 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image, Alert} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { StatusBar } from "expo-status-bar";
 
-import { AppService } from '../services/app.service';
-import { user } from '../objects/user';
+import { register, RegistrationData } from '../api/register';
 
 const RegistrationApplication = ({navigation}: {navigation: any}) => {
 
+    //use this for setter and getter the datas on the fields
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
+    const [name, setUsername] = useState("");
 
-    //need to create it for create a new user Object to send to the Api
-    const appService = new AppService();
-    const [user, setUser] = useState<any>([]);
-
-    const createUser = async (e:any) => {
-        const response = await appService.registerUser(user);
-        console.log(response);
-    }
-    
-    const loginFunction = () => {
-        //navigation.navigate('Home'); 
-        console.log("Now call the Api to create a new user");
-        let userClone = {...user};
-        userClone.name = username;
-        userClone.password = password;
-        userClone.email = email;
-        createUser(userClone);
+    //create const for change datas in field and handle event on the component
+    const handleChangeUsername = (value : string) => {
+        setUsername(value);
     };
+
+    const handlePasswordChange = (value : string) => {
+        setPassword(value);
+    };
+
+    const handleEmailChange = (value : string) => {
+        setEmail(value);
+    }
+
+    
+    const loginFunction = async () => {
+        console.log("enter into the function to register a user")
+        //need to create it for create a new user Object to send to the Api
+        const registrationData: RegistrationData = {
+            name,
+            email,
+            password,
+        };
+        console.log(JSON.stringify(registrationData));
+        
+        register(registrationData)
+        .then((response) => {
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.data.message);
+            if(response.data.message === 'success'){
+                Alert.alert(
+                    'Registration success',
+                    'You registration was successfully, now you can login',
+                        [
+                        {
+                            text: 'Login',
+                            onPress: () => navigation.navigate("Login"),
+                            style: 'cancel',
+                        },
+                        ],
+                )
+            }
+            //alert(response.data)
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log(error.response.data); // the error response data returned by the server
+            console.log(error.response.status); 
+            alert("Something went wrong on the registration")
+        });
+    }
 
     const loginButton = () => {
         navigation.navigate('Login'); 
@@ -45,7 +78,7 @@ const RegistrationApplication = ({navigation}: {navigation: any}) => {
               style={styles.TextInput}
               placeholder="Username"
               placeholderTextColor="#003f5c"
-              onChangeText={(username) => setUsername(username)}
+              onChangeText={handleChangeUsername}
               mode="outlined"
             /> 
           </View> 
@@ -54,7 +87,7 @@ const RegistrationApplication = ({navigation}: {navigation: any}) => {
               style={styles.TextInput}
               placeholder="Email"
               placeholderTextColor="#003f5c"
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={handleEmailChange}
               mode="outlined"
             /> 
           </View> 
@@ -64,7 +97,7 @@ const RegistrationApplication = ({navigation}: {navigation: any}) => {
               placeholder="Password"
               placeholderTextColor="#003f5c"
               secureTextEntry={true}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={handlePasswordChange}
               mode="outlined"
             /> 
           </View> 
