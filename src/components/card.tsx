@@ -19,10 +19,11 @@ const MyCard = () => (
 
 const styles = StyleSheet.create({
     container: {
-        //flex: 1,
-        //backgroundColor: "#fff",
-        width:"100%",
-      },
+      flex: 1, 
+      padding: 20,
+      height: '100%',
+      backgroundColor: '#fff',
+    },
 });
 
 export default MyCard;

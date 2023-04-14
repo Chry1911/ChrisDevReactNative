@@ -9,7 +9,9 @@ const MyHome = () => {
     return (
         <View style={styles.container}>
             <MyHomeAppBar />
-            <MyCard />
+            <View style={styles.cardContainer}>
+                <MyCard />
+            </View>
             <MyFAB />
         </View>
     );
@@ -19,8 +21,12 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#fff",
-      width:"100%",
     },
+    cardContainer : {
+        flex : 1,
+        minHeight: 300,
+        backgroundColor: "#fff",
+    }
 });
 
 export default MyHome;
