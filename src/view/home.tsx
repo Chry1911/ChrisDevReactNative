@@ -8,6 +8,7 @@ import { CommonActions } from '@react-navigation/native';
 
 import MyFAB from '../components/fab';
 import MySettingPage from './settings';
+import MyHome from './myhome';
 
 type ParamList = {
     HomePage: { title: string };
@@ -85,8 +86,7 @@ export default function MyComponent() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-        <Text variant="headlineMedium" style={styles.text}>Home!</Text>
-        <MyFAB />
+        <MyHome />
     </View>
   );
 }

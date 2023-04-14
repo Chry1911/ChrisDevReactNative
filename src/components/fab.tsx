@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FAB, Portal, Provider } from 'react-native-paper';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 
 import MyModal from '../components/modal'
 
@@ -32,11 +32,20 @@ const MyFAB = () => {
             if (open) {
             }
           }}
+          style={styles.container}
         />
         <MyModal visible={visible} hideModal={hideModal} />
       </Portal>
     </Provider>
   );
 };
+
+const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        position: "relative",
+      }
+})
 
 export default MyFAB;

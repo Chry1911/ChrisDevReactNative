@@ -2,12 +2,14 @@ import * as React from 'react';
 import { View, StyleSheet, ScrollView} from 'react-native';
 import { Button, Text}  from 'react-native-paper';
 
-import MyAppBar from '../components/appbar';
+import MyHomeAppBar from '../components/homeappbar';
+import MyFAB from '../components/fab';
 
-const MySettingPage = () => {
+const MyHome = () => {
     return (
         <View style={styles.container}>
-            <MyAppBar />
+            <MyHomeAppBar />
+            <MyFAB />
         </View>
     );
 }
@@ -20,4 +22,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MySettingPage;
+export default MyHome;

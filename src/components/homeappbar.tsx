@@ -4,7 +4,7 @@ import { Platform, StyleSheet } from 'react-native';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-const MyAppBar = () => {
+const MyHomeAppBar = () => {
   const _goBack = () => console.log('Went back');
 
   const _handleSearch = () => console.log('Searching');
@@ -13,8 +13,7 @@ const MyAppBar = () => {
 
   return (
     <Appbar.Header style={styles.container}>
-      <Appbar.BackAction onPress={_goBack} />
-      <Appbar.Content title="My Settings" />
+      <Appbar.Content title="Home" />
       <Appbar.Action icon="magnify" onPress={_handleSearch} />
       <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
     </Appbar.Header>
@@ -26,4 +25,4 @@ const styles = StyleSheet.create({
         width:"100%",
     }
 })
-export default MyAppBar;
+export default MyHomeAppBar;
