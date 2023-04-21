@@ -27,7 +27,7 @@ export default function MyComponent() {
         headerShown: false,
       }}
       tabBar={({ navigation, state, descriptors, insets }) => (
-        <BottomNavigation.Bar
+        <BottomNavigation.Bar style={styles.bottomNavigator}
           navigationState={state}
          safeAreaInsets={insets}
           onTabPress={({ route, preventDefault }) => {
@@ -113,6 +113,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 20,
     },
+    bottomNavigator : {
+      backgroundColor: 'white',
+    }
 });
 
 
