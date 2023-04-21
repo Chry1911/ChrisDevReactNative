@@ -63,8 +63,9 @@ const MySettings= () => {
   }, [value]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#f8f8f8', flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+      {/* <ScrollView> contentContainerStyle={styles.container} */}
         <View style={styles.header}>
             <MyAppBar />
         </View>
@@ -180,9 +181,7 @@ const MySettings= () => {
 
 const styles = StyleSheet.create({
   header: {
-    //paddingLeft: 24,
-    //paddingRight: 24,
-    //marginBottom: 12,
+    marginTop: -60,
   },
   title: {
     fontSize: 32,
